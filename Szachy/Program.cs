@@ -84,8 +84,6 @@ namespace Szachy
 			Board[start.X, start.Y] = ' ';
 			Board[end.X, end.Y] = piece;
 
-
-
             return true;
 
 		}
@@ -119,16 +117,8 @@ namespace Szachy
 					Board[x,y] = pos;
 					x++;
 				}
-
-                
             }
-
-
-
-
-
         }
-
 
 		public void PrintOut()
 		{
