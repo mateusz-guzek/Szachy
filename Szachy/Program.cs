@@ -6,17 +6,7 @@ namespace Szachy
 	{
 		static void Main(string[] args)
 		{
-			Game board = new();
-			board.PrintOut();
-			while (true)
-			{
-				Console.Write("Make a move: ");
-				string input = Console.ReadLine();
-				if (board.TryMove(input))
-				{
-					board.PrintOut();
-				}
-			}
+			new Game().Play();
 		}
 	}
 
@@ -47,6 +37,8 @@ namespace Szachy
 
 		private const string START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
+		private bool WhiteTurn = true;    // true - white turn / false - black turn
+
 		public Game()
 		{
 			Board = new char[8, 8];
@@ -58,6 +50,27 @@ namespace Szachy
 				}
 			}
 			FenFill(START_FEN);
+		}
+
+		public void Play()
+		{
+			this.PrintOut();
+			while (true)
+			{
+				if (WhiteTurn)
+				{
+					Console.Write("White move: ");
+				} else
+				{
+					Console.Write("Black move: ");
+				}
+				string input = Console.ReadLine();
+				if (this.TryMove(input))
+				{
+					this.PrintOut();
+				}
+				WhiteTurn = !WhiteTurn;
+			}
 		}
 
 
@@ -170,7 +183,7 @@ namespace Szachy
 			Console.Write("   ");								// horizontal coords
 			for (int i = 0; i < 8; i++)							
 			{													
-				Console.Write($" {(char)('B' + i)} ");			
+				Console.Write($" {(char)('A' + i)} ");			
 			}													
 			Console.WriteLine();								//
 			Console.BackgroundColor = DefaultBackgroundColor;
